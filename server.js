@@ -6,7 +6,8 @@ var app = require('./index.js'),
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect(config.dbConnectionUrl.dev, {
+const dbUrl = process.env.NODE_ENV === dev ? config.dbConnectionUrl.dev : config.dbConnectionUrl.prod;
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -17,4 +18,5 @@ mongoose.connect(config.dbConnectionUrl.dev, {
         err => console.log(err)
     );
 
+console.log('Environment', process.env);
 console.log('Movies list RESTful API server started on: ' + port);
