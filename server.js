@@ -18,5 +18,4 @@ mongoose.connect(dbUrl, {
         err => console.log(err)
     );
 
-console.log('Environment', process.env);
 console.log('Movies list RESTful API server started on: ' + port);

@@ -39,7 +39,6 @@ test("GET /movies/:id", async () => {
     await supertest(app).get(`/Movies/${mockId}`)
         .expect(200)
         .then((response) => {
-            console.log('==>', response.body);
             expect(response.body.imdbID).toBe(movie.imdbID);
             expect(response.body.title).toBe(movie.title);
             expect(response.body.content).toBe(movie.content);
