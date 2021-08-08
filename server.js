@@ -1,23 +1,20 @@
-const config = require('./config')
-var express = require('express'),
-    app = express(),
+const config = require('./config');
+var app = require('./index.js'),
     port = process.env.PORT || 8080,
     mongoose = require('mongoose'),
-    Movie = require('./api/models/moviesModel'), //created model loading here
     bodyParser = require('body-parser');
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect(config.dbConnectionUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-    .then(() => console.log("Database Connected Successfully"))
-    .catch(err => console.log(err));
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-var routes = require('./api/routes/moviesRoutes'); //importing route
-routes(app); //register the route
-
-app.listen(port);
+mongoose.connect(config.dbConnectionUrl.dev, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(
+    () => app.listen(port)
+)
+    .catch(
+        err => console.log(err)
+    );
 
 console.log('Movies list RESTful API server started on: ' + port);

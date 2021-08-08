@@ -18,7 +18,7 @@ var MoviesSchema = new Schema({
         }]
     },
     title: { type: String },
-    imdbId: { type: String },
+    imdbID: { type: String },
     listingType: { type: String },
     imdbRating: { type: String },
 });
