@@ -1,6 +1,6 @@
 var {
     listAllMovies, createMovie, getMovieDetails
-} = require('../../controllers/moviesController');
+} = require('../controllers/moviesController');
 
 const MoviesRoutes = (app) => {
     // Movies Routes

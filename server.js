@@ -1,7 +1,21 @@
+const config = require('./config')
 var express = require('express'),
     app = express(),
-    port = process.env.PORT || 8080;
+    port = process.env.PORT || 8080,
+    mongoose = require('mongoose'),
+    Movie = require('./api/models/moviesModel'), //created model loading here
+    bodyParser = require('body-parser');
+
+// mongoose instance connection url connection
+mongoose.Promise = global.Promise;
+mongoose.connect(config.dbConnectionUrl);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var routes = require('./api/routes/moviesRoutes'); //importing route
+routes(app); //register the route
 
 app.listen(port);
 
-console.log('Movies RESTful API server started on: ' + port);
+console.log('Movies list RESTful API server started on: ' + port);
