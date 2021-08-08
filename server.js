@@ -8,7 +8,9 @@ var express = require('express'),
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect(config.dbConnectionUrl);
+mongoose.connect(config.dbConnectionUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+    .then(() => console.log("Database Connected Successfully"))
+    .catch(err => console.log(err));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
